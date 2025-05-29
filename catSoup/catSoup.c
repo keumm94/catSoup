@@ -90,23 +90,29 @@ int main(void) {
 
 
 		//이동
-		printf("▶ 쫀떡 이동: 집사와 친밀할수록 냄비 쪽으로 갈 확률이 높아집니다.\n");
-		printf("  주사위 눈이 \'%d\' 이상이면 냄비 쪽으로 이동합니다.\n", 6 - rel);
-		printf("  주사위가 굴러갑니다. 또르르륵...\n");
 		int position;
-		for (int i = 0; i < 1; i++) {
-			int r = rand() % 6 + 1;
-			printf("  %d이(가) 나왔습니다!\n", r);
-			if ((r >= 6 - rel) && (cat_position < BWL_POS)) {
-				prev_position = cat_position;
+		switch (feeling) {
+		case 0 : //집 쪽으로 이동
+			prev_position = cat_position;
+			if (cat_position > HME_POS) {
+				cat_position--;
+			}
+			printf("▶ 기분이 매우 나쁜 쫀떡은 집으로 향합니다.\n\n");
+			break;
+		case 1: // 더 가까운 놀이기구 쪽으로 이동
+
+		case 2: //제자리에 대기
+			printf("▶ 쫀떡은 기분 좋게 식빵을 굽고 있습니다.\n\n");
+			break;
+
+		case 3 : //냄비 쪽으로 이동
+			prev_position = cat_position;
+			if (cat_position < BWL_POS) {
 				position = cat_position++;
-				printf("  냄비 쪽으로 이동합니다.\n\n");
 			}
-			else if ((r < 6 - rel) && (cat_position > HME_POS)) {
-				prev_position = cat_position;
-				position = cat_position--;
-				printf("  집 쪽으로 이동합니다.\n\n");
-			}
+			printf("  쫀떡은 골골송을 부르며 수프를 만들러 갑니다.\n\n");
+			break;
+
 		}
 
 		//수프 제작
