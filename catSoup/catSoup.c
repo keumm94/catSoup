@@ -202,7 +202,7 @@ int main(void) {
 		}
 
 		//방
-		drawRoom(cat_position, prev_position);
+		drawRoom(cat_position, prev_position, scratcher_position, cattower_position);
 
 		//상호작용
 		int interaction;
