@@ -79,7 +79,7 @@ int main(void) {
 	int has_mouse = 0, has_laser = 0, has_cattower = 0, has_scratcher = 0;
 
 	//턴
-	int turn = 1;
+	int turn = 0;
 
 	while (1) {
 		//상태 출력
