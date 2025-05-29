@@ -71,6 +71,24 @@ int main(void) {
 		}
 		printf("==================================================\n\n");
 
+		//기분
+		printf("▶ 6-2: 주사위 눈이  \'%d\' 이하이면 그냥 기분이 나빠집니다.\n", 6 - rel);
+		printf("  주사위가 굴러갑니다. 또르르륵...\n");
+		for (int i = 0; i < 1; i++) {
+			int r = rand() % 6 + 1;
+			printf("  %d이(가) 나왔습니다.\n", r);
+			if ((r <= 6 - rel)) {
+				prev_feeling = feeling;
+				feeling = prev_feeling - 1;
+				if (feeling == 0) { feeling = 0; }
+				printf("  쫀떡의 기분이 나빠집니다: %d → %d\n\n", prev_feeling, feeling);
+			}
+			else {
+				printf("  쫀떡의 기분은 그대로입니다.\n\n");
+			}
+		}
+
+
 		//이동
 		printf("▶ 쫀떡 이동: 집사와 친밀할수록 냄비 쪽으로 갈 확률이 높아집니다.\n");
 		printf("  주사위 눈이 \'%d\' 이상이면 냄비 쪽으로 이동합니다.\n", 6 - rel);
