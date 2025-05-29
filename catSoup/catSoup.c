@@ -346,6 +346,17 @@ int main(void) {
 		}
 		printf("\n");
 
+		//CP생산
+		printf("▶ 쫀떡의 기분(0~3): %d\n", feeling);
+		printf("  집사와의 친밀도(0~4): %d\n", rel);
+		int get_cp;
+		get_cp = 0;
+		if (feeling == 0) { get_cp = rel; }
+		else { get_cp = (feeling - 1) + rel; }
+		cp = cp + get_cp;
+		printf("  쫀떡의 기분과 친밀도에 따라서 CP가 %d 포인트 생산되었습니다.\n", get_cp);
+		printf("  보유 CP: %d 포인트\n\n", cp);
+
 		Sleep(2500);
 		system("cls");
 	}
