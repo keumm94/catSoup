@@ -102,7 +102,22 @@ int main(void) {
 			}
 			printf("▶ 기분이 매우 나쁜 쫀떡은 집으로 향합니다.\n\n");
 			break;
-		case 1: // 더 가까운 놀이기구 쪽으로 이동
+
+		case 1: //더 가까운 놀이기구 쪽으로 이동
+			printf("▶ 쫀떡은 심심해서 놀이기구 쪽으로 이동합니다.\n\n");
+			if (has_scratcher || has_cattower) {
+				int target = has_scratcher ? scratcher_position : cattower_position;
+				if (cat_position < target) cat_position++;
+				else if (cat_position > target) cat_position--;
+			}
+			else {
+				if (feeling == !0) {
+					prev_feeling = feeling;
+					feeling = prev_feeling - 1;
+					printf("  놀 거리가 없어서 기분이 매우 나빠졌습니다.: %d → %d\n\n", prev_feeling, feeling);
+				}
+			}
+			break;
 
 		case 2: //제자리에 대기
 			printf("▶ 쫀떡은 기분 좋게 식빵을 굽고 있습니다.\n\n");
