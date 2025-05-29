@@ -6,6 +6,12 @@
 #define HME_POS 1
 #define BWL_POS (ROOM_WIDTH - 2)
 
+//수프: soup, 관계도: rel, cp: cp_point, 기분: cat_feeling
+int soup = 0, rel = 2;
+int cp = 0;
+int feeling = 3;
+int prev_feeling;
+
 // 방 그리기  
 //cat_position: 고양이 위치, prev_position: 이전 위치
 void drawRoom(int cat_position, int prev_position) {
@@ -30,9 +36,6 @@ int main(void) {
 
 	int cat_position = HME_POS; //초기 위치
 	int prev_position = cat_position - 1; // 이전 위치
-
-	//수프: soup, 관계도: rel
-	int soup = 0, rel = 2;
 
 	while (1) {
 		//상태 출력
