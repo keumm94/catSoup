@@ -357,6 +357,101 @@ int main(void) {
 		printf("  쫀떡의 기분과 친밀도에 따라서 CP가 %d 포인트 생산되었습니다.\n", get_cp);
 		printf("  보유 CP: %d 포인트\n\n", cp);
 
+		//상점
+		int choice_num;
+		printf("▶ 상점에서 물건을 살 수 있습니다.\n");
+		printf("  어떤 물건을 구매할까요?\n");
+		printf("   0. 아무것도 사지 않는다.\n");
+		if (has_mouse == 0) { printf("   1. 장난감 쥐: 1 CP\n"); }
+		else { printf("   1. 장난감 쥐: 1 CP (품절)\n"); }
+		if (has_laser == 0) { printf("   2. 레이저 포인터: 2 CP\n"); }
+		else { printf("   2. 레이저 포인터: 2 CP (품절)\n"); }
+		if (has_scratcher == 0) { printf("   3. 스크래처: 4 CP\n"); }
+		else { printf("   3. 스크래처: 4 CP (품절)\n"); }
+		if (has_cattower == 0) { printf("   4. 캣 타워: 6 CP\n"); }
+		else { printf("   4. 캣 타워: 6 CP (품절)\n"); }
+		while (1) {
+			printf("▷ ");
+			scanf_s("%d", &choice_num);
+			printf("\n");
+			switch (choice_num) {
+			case 0: printf("▶ 아무것도 사지 않았습니다.\n"); break;
+			case 1: //장난감 쥐
+				if (has_mouse == !0) {
+					printf("▶ 장난감 쥐를 이미 구매했습니다.\n");
+					continue;
+				}
+				else if (cp < 1) {
+					printf("▶ CP가 부족합니다.\n");
+					continue;
+				}
+				else {
+					has_mouse = 1;
+					cp = cp - 1;
+					printf("▶ 장난감 쥐를 구매했습니다.\n");
+					printf("  보유 CP: %d\n", cp);
+					break;
+				}
+				break;
+			case 2: //레이저 포인터
+				if (has_laser == !0) {
+					printf("▶ 레이저 포인터를 이미 구매했습니다.\n");
+					continue;
+				}
+				else if (cp < 2) {
+					printf("▶ CP가 부족합니다.\n");
+					continue;
+				}
+				else {
+					has_laser = 1;
+					cp = cp - 2;
+					printf("▶ 레이저 포인터를 구매했습니다.\n");
+					printf("  보유 CP: %d\n", cp);
+					break;
+				}
+				break;
+			case 3: //스크래처
+				if (has_scratcher == !0) {
+					printf("▶ 스크래처를 이미 구매했습니다.\n");
+					continue;
+				}
+				else if (cp < 4) {
+					printf("▶ CP가 부족합니다.\n");
+					continue;
+				}
+				else {
+					has_scratcher = 1;
+					cp = cp - 4;
+					printf("▶ 스크래처를 구매했습니다.\n");
+					printf("  보유 CP: %d\n", cp);
+					break;
+				}
+				break;
+			case 4: //캣타워
+				if (has_cattower == !0) {
+					printf("▶ 캣 타워를 이미 구매했습니다.\n");
+					continue;
+				}
+				else if (cp < 6) {
+					printf("▶ CP가 부족합니다.\n");
+					continue;
+				}
+				else {
+					has_cattower = 1;
+					cp = cp - 6;
+					printf("▶ 캣 타워를 구매했습니다.\n");
+					printf("  보유 CP: %d\n", cp);
+					break;
+				}
+				break;
+			default: continue;
+			}
+			break;
+		}
+
+		printf("\n");
+
+
 		Sleep(2500);
 		system("cls");
 	}
