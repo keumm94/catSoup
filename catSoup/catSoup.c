@@ -46,6 +46,8 @@ int main(void) {
 
 	int cat_position = HME_POS; //초기 위치
 	int prev_position = cat_position - 1; // 이전 위치
+	int scratcher_position = -1; // 스크래처 위치
+	int cattower_position = -1; //캣타워 위치
 
 	while (1) {
 		//상태 출력
