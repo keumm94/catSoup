@@ -162,6 +162,7 @@ int main(void) {
 
 		//상호작용
 		int interaction;
+		printf("▶ 어떤 상호작용을 하시겠습니까?\n");
 		printf("  0. 아무것도 하지 않음\n");
 		printf("  1. 긁어 주기\n");
 		if (has_laser == 1) {
