@@ -37,6 +37,32 @@ void drawRoom(int cat_position, int prev_position, int scratcher_position, int c
 	printf("\n##########\n\n");
 }
 
+//돌발퀘스트
+void quest() {
+	int choice_box, hide_box; //choice_box: 유저 선택, hide_box: 고양이가 숨은 박스
+	hide_box = rand() % 4 + 1;
+	printf("▶ 돌발 퀘스트 발생!\n");
+	printf("  쫀떡이 버려져있는 박스 안에 숨었습니다.\n");
+	printf("  당신이 찾아낸다면 관계가 좋아질 수도...\n");
+	printf("  ■ ■ ■ ■\n");
+	printf("  어디에 숨었을까요? (1 ~ 4)\n");
+	printf("▷ ");
+	scanf_s("%d", &choice_box);
+	printf("\n");
+	if (choice_box == hide_box) {
+		printf("▶ 쫀떡을 찾았습니다. 대단해요!\n");
+		rel++;
+		printf("  친밀도가 높아집니다.\n");
+		printf("  현재 친밀도: %d\n", rel);
+	}
+	else {
+		printf("▶ 쫀떡을 찾지 못했습니다. 실망이에요...\n");
+		rel--;
+		printf("  친밀도가 낮아집니다.\n");
+		printf("  현재 친밀도: %d\n", rel);
+	}
+}
+
 
 int main(void) {
 	//인트로
@@ -51,6 +77,9 @@ int main(void) {
 
 	//물건 
 	int has_mouse = 0, has_laser = 0, has_cattower = 0, has_scratcher = 0;
+
+	//턴
+	int turn = 1;
 
 	while (1) {
 		//상태 출력
@@ -474,6 +503,11 @@ int main(void) {
 			do { cattower_position = rand() % 6 + 2; } while (cattower_position == scratcher_position);
 		}
 
+		//퀘스트
+		turn++;
+		if (turn == 3) {
+			quest();
+		}
 
 		Sleep(2500);
 		system("cls");
