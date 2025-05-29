@@ -451,6 +451,14 @@ int main(void) {
 
 		printf("\n");
 
+		//랜덤 배치
+		if (has_scratcher == 1) {
+			do { scratcher_position = rand() % 6 + 2; } while (cattower_position == scratcher_position);
+		}
+		if (has_cattower == 1) {
+			do { cattower_position = rand() % 6 + 2; } while (cattower_position == scratcher_position);
+		}
+
 
 		Sleep(2500);
 		system("cls");
