@@ -14,9 +14,18 @@ int prev_feeling;
 
 // 방 그리기  
 //cat_position: 고양이 위치, prev_position: 이전 위치
-void drawRoom(int cat_position, int prev_position) {
+void drawRoom(int cat_position, int prev_position, int scratcher_position, int cattower_position) {
 	printf("##########\n");
-	printf("#H      B#\n");
+	printf("#");
+	for (int i = 1; i < ROOM_WIDTH - 1; i++) {
+		if (i == HME_POS) { printf("H"); }
+		else if (i == BWL_POS) { printf("B"); }
+		else if (i == scratcher_position) { printf("S"); }
+		else if (i == cattower_position) { printf("T"); }
+		else { printf(" "); }
+	}
+	printf("#\n");
+
 	printf("#");
 	for (int i = 1; i < ROOM_WIDTH - 1; i++) {
 		if (i == cat_position) { printf("C"); }
@@ -24,6 +33,7 @@ void drawRoom(int cat_position, int prev_position) {
 		else { printf(" "); }
 	}
 	printf("#");
+
 	printf("\n##########\n\n");
 }
 
