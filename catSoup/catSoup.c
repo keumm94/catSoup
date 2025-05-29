@@ -49,6 +49,9 @@ int main(void) {
 	int scratcher_position = -1; // 스크래처 위치
 	int cattower_position = -1; //캣타워 위치
 
+	//물건 
+	int has_mouse = 0, has_laser = 0, has_cattower = 0, has_scratcher = 0;
+
 	while (1) {
 		//상태 출력
 		printf("====================현재 상태 ====================\n");
@@ -159,60 +162,188 @@ int main(void) {
 
 		//상호작용
 		int interaction;
-		printf("▶ 어떤 상호작용을 하시겠습니까?\n");
-		printf("  0. 아무것도 하지 않음  1. 긁어 주기\n");
-		while (1) {
-			printf("▷ ");
-			scanf_s("%d", &interaction);
-			if (interaction == 0) {
-				printf("\n▶ 아무것도 하지 않았습니다.\n");
-				printf("  4/6확률로 친밀도가 떨어집니다.\n");
-				printf("  주사위가 굴러갑니다. 또르르륵...\n");
-				for (int i = 0; i < 1; i++) {
-					int r = rand() % 6 + 1;
-					printf("  %d이(가) 나왔습니다!\n", r);
-					if (r <= 4 && rel == 0) {
-						printf("  친밀도가 떨어집니다.\n");
-						printf("  현재 친밀도: %d\n\n", rel);
-					}
-					else if (r <= 4 && rel != 0) {
-						rel -= 1;
-						printf("  친밀도가 떨어집니다.\n");
-						printf("  현재 친밀도: %d\n\n", rel);
-					}
-					else if (r > 4) {
-						printf("  다행히 친밀도가 떨어지지 않았습니다.\n");
-						printf("  현재 친밀도: %d\n", rel);
-					}
-					break;
-				}
-				break;
+		printf("  0. 아무것도 하지 않음\n");
+		printf("  1. 긁어 주기\n");
+		if (has_laser == 1) {
+			printf("  2. 레이저 포인터로 놀아주기\n");
+			if (has_mouse == 1) {
+				printf("  3. 장난감 쥐로 놀아주기\n");
 			}
-			if (interaction == 1) {
-				printf("\n▶ 쫀떡의 턱을 긁어주었습니다.\n");
-				printf("  2/6확률로 친밀도가 높아집니다.\n");
-				printf("  주사위를 굴립니다. 또르륵...\n");
-				for (int i = 0; i < 1; i++) {
-					int r = rand() % 6 + 1;
-					printf("  %d이(가) 나왔습니다!\n", r);
-					if (r >= 5 && rel == 4) {
-						printf("  친밀도가 높아집니다.\n");
-						printf("  현재 친밀도: %d\n\n", rel);
-					}
-					else if (r >= 5 && rel != 4) {
-						rel += 1;
-						printf("  친밀도가 높아집니다.\n");
-						printf("  현재 친밀도: %d\n\n", rel);
-					}
-					else if (r < 5) {
-						printf("  친밀도는 그대로입니다.\n");
-						printf("  현재 친밀도: %d\n", rel);
+			while (1) {
+				printf("▷ ");
+				scanf_s("%d", &interaction);
+				if (interaction == 0) {
+					prev_feeling = feeling;
+					feeling = prev_feeling - 1;
+					if (feeling == 0) { feeling = 0; }
+					printf("\n▶ 아무것도 하지 않았습니다.\n");
+					printf("  쫀떡의 기분이 나빠졌습니다: %d → %d\n", prev_feeling, feeling);
+					for (int i = 0; i < 1; i++) {
+						int r = rand() % 6 + 1;
+						if (r >= 5 && rel == !0) {
+							rel--;
+							printf("  집사와의 관계가 나빠집니다. \n");
+						}
 					}
 					break;
 				}
-				break;
+				else if (interaction == 1) {
+					printf("\n▶ 쫀떡의 턱을 긁어주었습니다.\n");
+					printf("  쫀떡의 기분은 그대로입니다: %d\n", feeling);
+					for (int i = 0; i < 1; i++) {
+						int r = rand() % 6 + 1;
+						if (r <= 5 && rel == !6) {
+							rel++;
+							printf("  친밀도가 높아집니다.\n");
+							printf("  현재 친밀도: %d\n", rel);
+						}
+					}
+					break;
+				}
+				else if (interaction == 2) {
+					prev_feeling = feeling;
+					feeling = prev_feeling + 2;
+					if (feeling > 3) { feeling = 3; }
+					printf("\n▶ 레이저 포인터로 쫀떡과 놀아주었습니다.\n");
+					printf("  쫀떡의 기분이 꽤 좋아졌습니다: %d → %d\n", prev_feeling, feeling);
+					for (int i = 0; i < 1; i++) {
+						int r = rand() % 6 + 1;
+						if (r >= 4 && rel == !6) {
+							rel++;
+							printf("  친밀도가 높아집니다.\n");
+							printf("  현재 친밀도: %d\n", rel);
+						}
+					}
+					break;
+				}
+				else if (interaction == 3) {
+					prev_feeling = feeling;
+					feeling = prev_feeling + 1;
+					if (feeling > 3) { feeling = 3; }
+					printf("\n▶ 장난감 쥐로 쫀떡과 놀아주었습니다.\n");
+					printf("  쫀떡의 기분이 조금 좋아졌습니다: %d → %d\n", prev_feeling, feeling);
+					for (int i = 0; i < 1; i++) {
+						int r = rand() % 6 + 1;
+						if (r >= 4 && rel == !6) {
+							rel++;
+							printf("  친밀도가 높아집니다.\n");
+							printf("  현재 친밀도: %d\n", rel);
+						}
+					}
+					printf("\n");
+					break;
+				}
+				else { continue; }
+			}
+
+		}
+		else if (has_mouse == 1) {
+			printf("  2. 장난감 쥐로 놀아주기\n");
+			if (has_laser == 1) {
+				printf("  3. 레이저 포인터로 놀아주기\n");
+			}
+			while (1) {
+				printf("▷ ");
+				scanf_s("%d", &interaction);
+				if (interaction == 0) {
+					prev_feeling = feeling;
+					feeling = prev_feeling - 1;
+					if (feeling == 0) { feeling = 0; }
+					printf("\n▶ 아무것도 하지 않았습니다.\n");
+					printf("  쫀떡의 기분이 나빠졌습니다: %d → %d\n", prev_feeling, feeling);
+					for (int i = 0; i < 1; i++) {
+						int r = rand() % 6 + 1;
+						if (r >= 5 && rel == !0) {
+							rel--;
+							printf("  집사와의 관계가 나빠집니다. \n");
+						}
+					}
+					break;
+				}
+				else if (interaction == 1) {
+					printf("\n▶ 쫀떡의 턱을 긁어주었습니다.\n");
+					printf("  쫀떡의 기분은 그대로입니다: %d\n", feeling);
+					for (int i = 0; i < 1; i++) {
+						int r = rand() % 6 + 1;
+						if (r <= 5 && rel == !6) {
+							rel++;
+							printf("  친밀도가 높아집니다.\n");
+							printf("  현재 친밀도: %d\n", rel);
+						}
+					}
+					break;
+				}
+				else if (interaction == 2) {
+					prev_feeling = feeling;
+					feeling = prev_feeling + 1;
+					if (feeling > 3) { feeling = 3; }
+					printf("\n▶ 장난감 쥐로 쫀떡과 놀아주었습니다.\n");
+					printf("  쫀떡의 기분이 조금 좋아졌습니다: %d → %d\n", prev_feeling, feeling);
+					for (int i = 0; i < 1; i++) {
+						int r = rand() % 6 + 1;
+						if (r >= 4 && rel == !6) {
+							rel++;
+							printf("  친밀도가 높아집니다.\n");
+							printf("  현재 친밀도: %d\n", rel);
+						}
+					}
+					break;
+				}
+				else if (interaction == 3) {
+					prev_feeling = feeling;
+					feeling = prev_feeling + 2;
+					if (feeling > 3) { feeling = 3; }
+					printf("\n▶ 레이저 포인터로 쫀떡과 놀아주었습니다.\n");
+					printf("  쫀떡의 기분이 꽤 좋아졌습니다: %d → %d\n", prev_feeling, feeling);
+					for (int i = 0; i < 1; i++) {
+						int r = rand() % 6 + 1;
+						if (r >= 4 && rel == !6) {
+							rel++;
+							printf("  친밀도가 높아집니다.\n");
+							printf("  현재 친밀도: %d\n", rel);
+						}
+					}
+					break;
+				}
+				else { continue; }
 			}
 		}
+		else if (has_laser == 0 && has_mouse == 0) {
+			while (1) {
+				printf("▷ ");
+				scanf_s("%d", &interaction);
+				if (interaction == 0) {
+					prev_feeling = feeling;
+					feeling = prev_feeling - 1;
+					if (feeling == 0) { feeling = 0; }
+					printf("\n▶ 아무것도 하지 않았습니다.\n");
+					printf("  쫀떡의 기분이 나빠졌습니다: %d → %d\n", prev_feeling, feeling);
+					for (int i = 0; i < 1; i++) {
+						int r = rand() % 6 + 1;
+						if (r >= 5 && rel == !0) {
+							rel--;
+							printf("  집사와의 관계가 나빠집니다. \n");
+						}
+					}
+					break;
+				}
+				else if (interaction == 1) {
+					printf("\n▶ 쫀떡의 턱을 긁어주었습니다.\n");
+					printf("  쫀떡의 기분은 그대로입니다: %d\n", feeling);
+					for (int i = 0; i < 1; i++) {
+						int r = rand() % 6 + 1;
+						if (r <= 5 && rel == !6) {
+							rel++;
+							printf("  친밀도가 높아집니다.\n");
+							printf("  현재 친밀도: %d\n", rel);
+						}
+					}
+					break;
+				}
+				else { continue; }
+			}
+		}
+		printf("\n");
 
 		Sleep(2500);
 		system("cls");
