@@ -115,9 +115,8 @@ int main(void) {
 
 		}
 
-		//수프 제작
-		switch (cat_position) {
-		case BWL_POS:
+		//행동
+		if (cat_position == BWL_POS) {
 			for (int i = 0; i < 1; i++) {
 				int soup_r = rand() % 2;
 				if (soup_r == 0) {
@@ -129,13 +128,30 @@ int main(void) {
 				else {
 					printf("▶ 쫀떡이가 브로콜리 스프를 만들었습니다!\n");
 				}
+				soup++;
+				printf("  현재까지 만든 스프: %d\n\n", soup);
 			}
-			soup++;
-			printf("  현재까지 만든 스프: %d\n\n", soup);
-			break;
-		case HME_POS:
+		}
+		if (cat_position == HME_POS) {
 			printf("▶ 쫀떡은 자신의 집에서 편안함을 느낍니다.\n\n");
-			break;
+			prev_feeling = feeling;
+			feeling = prev_feeling + 1;
+			if (feeling > 3) { feeling = 3; }
+			printf("  쫀떡의 기분이 꽤 좋아졌습니다: %d → %d\n", prev_feeling, feeling);
+		}
+		if (cat_position == scratcher_position) {
+			prev_feeling = feeling;
+			feeling = prev_feeling + 1;
+			if (feeling > 3) { feeling = 3; }
+			printf("▶ 쫀떡은 스크래처를 긁고 놀았습니다.\n");
+			printf("  기분이 조금 좋아졌습니다: %d → %d\n\n", prev_feeling, feeling);
+		}
+		if (cat_position == cattower_position) {
+			prev_feeling = feeling;
+			feeling = prev_feeling + 2;
+			if (feeling > 3) { feeling = 3; }
+			printf("▶ 쫀떡은 캣타워를 뛰어다닙니다.\n");
+			printf("  기분이 조금 좋아졌습니다: %d → %d\n\n", prev_feeling, feeling);
 		}
 
 		//방
